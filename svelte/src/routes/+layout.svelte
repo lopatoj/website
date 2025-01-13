@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 	import '../app.css';
+	import { thisYear } from '$lib/dates';
 
 	let { children } = $props();
 
@@ -38,5 +39,5 @@
 	<p>linkedin: <a href="https://www.linkedin.com/in/lopatoj">lopatoj</a></p>
 	<p>github: <a href="https://www.github.com/in/lopatoj">lopatoj</a></p>
 	<br />
-	<p>© Justin Lopato {new Date().getFullYear()}</p>
+	<p>© Justin Lopato {thisYear()}</p>
 </div>

@@ -1,7 +1,6 @@
 import { client } from "$lib/sanity";
 import { error } from "@sveltejs/kit";
 import type { PageLoad } from "./$types";
-import type { PortableTextBlock } from "@portabletext/types";
 
 export type Project = {
 	number: number,
@@ -12,7 +11,7 @@ export type Project = {
 	}[],
 	description: string,
 	date: string,
-	body: PortableTextBlock[]
+	body: object[]
 };
 
 export const load: PageLoad = async ({ params }): Promise<{ project: Project }> => {

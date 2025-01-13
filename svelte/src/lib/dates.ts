@@ -5,3 +5,5 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 }
 
 export const dateFrom = (date: string) => new Date(date).toLocaleDateString("en-US", dateOptions);
+
+export const thisYear = () => new Date().getFullYear();

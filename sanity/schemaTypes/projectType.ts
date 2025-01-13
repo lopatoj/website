@@ -1,4 +1,4 @@
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const projectType = defineType({
   name: 'project',
@@ -13,7 +13,8 @@ export const projectType = defineType({
     defineField({
       name: 'number',
       type: 'number',
-      initialValue: 0,
+      readOnly: true,
+      initialValue: (_, context) => context.getClient({ apiVersion: "2025-01-07" }).fetch("count(*[_type == 'project'])"),
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -51,7 +52,10 @@ export const projectType = defineType({
       name: 'body',
       type: 'array',
       initialValue: () => [],
-      of: [defineArrayMember({type: 'block'})],
+      of: [
+        defineArrayMember({ type: 'block' }), 
+        defineArrayMember({ type: 'image' })
+      ],
     }),
   ],
 })

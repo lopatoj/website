@@ -15,7 +15,7 @@
 </script>
 
 <div class="w-[40rem] flex flex-col items-center min-h-screen -mb-[200px]">
-	<div id="banner" class="fade relative z-20 bg-red-500 h-[1.4rem] text-[--bg] w-[115%] text-nowrap transition-opacity overflow-hidden ease-in-out duration-100">
+	<div id="banner" class="fade relative z-20 bg-red-500 h-[1.4rem] text-[--bg] w-[115%] text-nowrap transition-opacity overflow-hidden ease-in-out duration-200">
 		<span>hi! find out about my work @ my github</span>
 	</div>
 	<div id="header" class="box-border z-10 top-0 sticky w-full grid columns-2 pt-4 mb-4 bg-[--bg] h-28 text-lg tracking-tighter">
@@ -37,7 +37,7 @@
 <div id="footer">
 	<p>email: <a href="mailto:justin@lopato.org">justin@lopato.org</a></p>
 	<p>linkedin: <a href="https://www.linkedin.com/in/lopatoj">lopatoj</a></p>
-	<p>github: <a href="https://www.github.com/in/lopatoj">lopatoj</a></p>
+	<p>github: <a href="https://www.github.com/lopatoj">lopatoj</a></p>
 	<br />
 	<p>© Justin Lopato {thisYear()}</p>
 </div>

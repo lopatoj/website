@@ -4,7 +4,7 @@
 
 :root {
 	font-family: "CommitMono";
-	text-rendering: optimizeLegibility;
+	/* text-rendering: optimizeLegibility; */
 
 	--bg: white;
 	--text: black;
@@ -47,7 +47,7 @@ a:active {
 }
 
 .container {
-	@apply w-[40rem] h-full;
+	@apply w-[44rem] h-full;
 }
 
 .center {
@@ -91,8 +91,7 @@ a:active {
 	}
 
 	.head {
-		height: 4rem;
-		width: 4rem;
+		height: 3.5rem;
 		translate: 0px -.25rem;
 	}
 

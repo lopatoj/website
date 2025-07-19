@@ -3,7 +3,7 @@
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
-  "packageManager": "pnpm@10.0.0",
+	"packageManager": "pnpm@10.0.0",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -12,6 +12,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
+		"@portabletext/svelte": "^3.0.0",
 		"@portabletext/types": "^2.0.13",
 		"@sveltejs/adapter-auto": "^3.3.1",
 		"@sveltejs/kit": "^2.15.2",

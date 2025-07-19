@@ -3,17 +3,25 @@ import type { PageLoad } from "./$types";
 
 export type Summary = {
 	number: number,
+	type: boolean,
 	name: string,
-	thumbnail: string
+	thumbnail: {
+		url: string,
+		caption: string
+	},
 	description: string,
 	date: string
 };
 
 export const load: PageLoad = async (): Promise<{ projects: Summary[] }> => {
 	let projects = await client.fetch(`*[_type == "project"]{ 
-	  number, 
+	  number,
+	  type,
 	  name, 
-	  "thumbnail": images[0].image.asset -> url,
+	  thumbnail {
+		"url": image.asset -> url,
+		caption
+	  },
 	  description,
 	  "date": publishedAt
 	} | order(date desc)`);

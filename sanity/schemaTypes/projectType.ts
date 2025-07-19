@@ -11,6 +11,10 @@ export const projectType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'type',
+      type: 'boolean',
+    }),
+    defineField({
       name: 'number',
       type: 'number',
       readOnly: true,
@@ -29,31 +33,28 @@ export const projectType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'images',
-      type: 'array',
-      of: [defineArrayMember({
-        type: 'object',
-        fields: [
-          defineField({
-            name: "image",
-            type: "image",
-            validation: (rule) => rule.required()
-          }),
-          defineField({
-            name: "caption",
-            type: "text",
-            validation: (rule) => rule.required()
-          })
-        ]
-      })],
-      validation: (rule) => rule.required().min(1)
+      name: 'thumbnail',
+      type: 'object',
+      fields: [
+        defineField({
+          name: "image",
+          type: "image",
+          validation: (rule) => rule.required()
+        }),
+        defineField({
+          name: "caption",
+          type: "string",
+          validation: (rule) => rule.required()
+        })
+      ],
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'body',
       type: 'array',
       initialValue: () => [],
       of: [
-        defineArrayMember({ type: 'block' }), 
+        defineArrayMember({ type: 'block' }),
         defineArrayMember({ type: 'image' })
       ],
     }),

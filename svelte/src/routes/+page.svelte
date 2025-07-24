@@ -1,7 +1,28 @@
+<script lang="ts">
+  const { data } = $props();
+
+  import SummaryView from "./SummaryView.svelte";
+  import { pageEnum } from "sanity/schemaTypes/pageType";
+
+  const categories = new Map(pageEnum.map((t) => [t, data.pages.filter((p) => p.type === t)]));
+</script>
+
 <svelte:head>
-	<title>justin lopato</title>
+  <title>justin.lopa.to</title>
 </svelte:head>
 
-<div class="">
-	<h1 class="text-5xl/tight line justify-stretch">Hello. My name is Justin Lopato. I am currently doing CS & robotics at Rice University. I enjoy listening to cutting edge music, and having a great time with friends. Recently, I have been spending a lot of time at the Rice Robotics Club, where I am a lead in the CS subteam of R&D. There, I have gained a wealth of knowledge from topics like control systems, simulation, and robotic kinematics/dynamics. To learn more about my endeavors, head to the section of this website labeled <a href="/stuff">stuff</a>.</h1>
+<div>
+  <h2 id="project" class="text-4xl font-bold my-6 text-indigo-700">Projects</h2>
+  <div class="flex flex-col gap-4 items-center">
+    {#each categories.get("project")! as summary (summary.slug)}
+      <SummaryView {...summary} />
+    {/each}
+  </div>
+  <h2 id="etc" class="text-4xl font-bold my-6 text-red-600">More stuff!</h2>
+  <div class="flex flex-col gap-4 items-center">
+    {#each categories.get("etc")! as summary (summary.slug)}
+      <SummaryView {...summary} />
+    {/each}
+  </div>
 </div>
+ 

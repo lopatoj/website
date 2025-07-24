@@ -1,9 +1,10 @@
 import { client } from "$lib/sanity";
 import type { PageLoad } from "./$types";
+import { pageEnum } from "sanity/schemaTypes/pageType";
 
 export type Summary = {
-	number: number,
-	type: boolean,
+	slug: string,
+	type: typeof pageEnum[number],
 	name: string,
 	thumbnail: {
 		url: string,
@@ -13,20 +14,20 @@ export type Summary = {
 	date: string
 };
 
-export const load: PageLoad = async (): Promise<{ projects: Summary[] }> => {
-	let projects = await client.fetch(`*[_type == "project"]{ 
-	  number,
+export const load: PageLoad = async (): Promise<{ pages: Summary[] }> => {
+	let pages = await client.fetch(`*[_type == "page"]{ 
+	  "slug": slug.current, 
 	  type,
 	  name, 
 	  thumbnail {
-		"url": image.asset -> url,
-		caption
+			caption,
+			"url": image.asset -> url
 	  },
 	  description,
 	  "date": publishedAt
 	} | order(date desc)`);
 
 	return {
-		projects
+		pages
 	};
 };

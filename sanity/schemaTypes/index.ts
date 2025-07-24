@@ -1,3 +1,3 @@
-import { projectType } from "./projectType";
+import { pageType } from "./pageType";
 
-export const schemaTypes = [projectType];
+export const schemaTypes = [pageType];

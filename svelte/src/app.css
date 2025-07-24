@@ -4,14 +4,11 @@
 
 :root {
 	font-family: "CommitMono";
-	/* text-rendering: optimizeLegibility; */
-
-	--bg: white;
-	--text: black;
+	font-smooth: never;
 }
 
 body {
-	@apply bg-[--bg] text-[--text];
+	@apply bg-slate-50 text-gray-900;
 }
 
 main {
@@ -27,17 +24,6 @@ p {
 	letter-spacing: -.02em;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
 a:hover {
 	@apply opacity-70;
 }
@@ -46,75 +32,6 @@ a:active {
 	@apply opacity-40;
 }
 
-.container {
-	@apply w-[44rem] h-full;
-}
-
-.center {
-	@apply flex flex-col items-center;
-}
-
-.fade::before {
-	@apply box-border block z-30 content-["_"] absolute top-0 left-0 w-full h-full pointer-events-none;
-	box-shadow: inset 5rem 0rem 2rem -2rem white, inset -5rem 0rem 2rem -2rem white;
-}
-
-#banner:hover {
-	@apply opacity-70 cursor-pointer;
-}
-
-#banner span {
-	@apply absolute m-0 whitespace-nowrap;
-	animation: sidescroll 10s linear infinite;
-}
-
-@keyframes sidescroll {
-	0% {
-		transform: translateX(0);
-		left: 100%;
-	}
-
-	100% {
-		transform: translateX(-100%);
-		left: 0;
-	}
-}
-
-#header {
-	box-shadow: 0px calc(-4.5rem + clamp(0rem, var(--scroll), 4rem)) 2rem 3rem var(--bg);
-
-	.links {
-		display: flex;
-		gap: 1rem;
-		height: 100%;
-		align-items: center;
-	}
-
-	.head {
-		height: 3.5rem;
-		translate: 0px -.25rem;
-	}
-
-	.left {
-		grid-column: 1;
-		gap: .5rem;
-	}
-
-	.right {
-		grid-column: 2;
-		gap: 1rem;
-		justify-content: end;
-	}
-}
-
-#content {
-	@apply w-full;
-}
-
-#footer {
-	@apply w-[40rem] py-10 flex flex-col justify-center text-center;
-
-	p {
-		margin: 0px 0px;
-	}
+.w-content {
+	@apply w-[40rem];
 }

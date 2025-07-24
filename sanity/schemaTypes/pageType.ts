@@ -1,8 +1,10 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
-export const projectType = defineType({
-  name: 'project',
-  title: 'Project',
+export const pageEnum = ['project', 'etc'];
+
+export const pageType = defineType({
+  name: 'page',
+  title: 'Page',
   type: 'document',
   fields: [
     defineField({
@@ -12,15 +14,29 @@ export const projectType = defineType({
     }),
     defineField({
       name: 'type',
-      type: 'boolean',
-    }),
-    defineField({
-      name: 'number',
-      type: 'number',
-      readOnly: true,
-      initialValue: (_, context) => context.getClient({ apiVersion: "2025-01-07" }).fetch("count(*[_type == 'project'])"),
+      type: 'string',
+      options: {
+        list: pageEnum
+      },
+      initialValue: 'project',
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'slug',
+      type: 'slug',
+      options: {
+        source: 'name',
+        maxLength: 96
+      },
+      validation: (rule) => rule.required(),
+    }),
+    // defineField({
+    //   name: 'number',
+    //   type: 'number',
+    //   readOnly: true,
+    //   initialValue: (_, context) => context.getClient({ apiVersion: "2025-01-07" }).fetch("count(*[_type == 'project'])"),
+    //   validation: (rule) => rule.required(),
+    // }),
     defineField({
       name: 'publishedAt',
       type: 'datetime',
@@ -61,4 +77,4 @@ export const projectType = defineType({
   ],
 })
 
-export type Project = typeof projectType;
+export type Page = typeof pageType;

@@ -4,6 +4,9 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@sveltejs/kit"
+    ],
+    "ignoredBuiltDependencies": [
+      "esbuild"
     ]
   }
 }

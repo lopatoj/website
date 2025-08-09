@@ -32,13 +32,12 @@
 <svelte:body {@attach setScroll} />
 
 <div class="w-content flex flex-col items-center min-h-screen -mb-16">
-	<nav id="header" class="z-10 top-0 sticky w-full flex mb-5 bg-stone-50 h-16 px-8 box-content text-lg tracking-tighter">
-		<a class="flex h-full items-center gap-[.4rem]" href="/">
+	<nav id="header" class="z-10 top-0 sticky w-full flex mb-5 bg-stone-50 min-h-16 gap-4 py-3 items-center px-8 box-content text-lg tracking-tighter flex-col sm:flex-row">
+		<a class="flex h-full items-center gap-[.4rem] flex-grow" href="/">
 			<img src="/me.png" class="h-[1.3em] mb-1" alt="Justin" />
 			<span>justin</span>
 			<span>lopato</span>
 		</a>
-		<div class="flex-grow"></div>
 		<div class="flex h-full items-center gap-4">
 			<a href="/">about</a>
 			<a href="/#project" onclick={scrollTo}>projects</a>

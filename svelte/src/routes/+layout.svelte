@@ -32,17 +32,18 @@
 <svelte:body {@attach setScroll} />
 
 <div class="w-content flex flex-col items-center min-h-screen -mb-[7rem]">
-	<nav id="header" class="box-border z-10 top-0 sticky w-full flex mb-5 bg-slate-50 h-16 text-lg tracking-tighter">
-		<a class="flex h-full items-center gap-2" href="/">
-			<img src="/me.png" class="h-[1.2em]" alt="Justin" />
-			justin lopato
+	<nav id="header" class="z-10 top-0 sticky w-full flex mb-5 bg-stone-50 h-16 px-8 box-content text-lg tracking-tighter">
+		<a class="flex h-full items-center gap-[.4rem]" href="/">
+			<img src="/me.png" class="h-[1.3em] mb-1" alt="Justin" />
+			<span>justin</span>
+			<span>lopato</span>
 		</a>
 		<div class="flex-grow"></div>
 		<div class="flex h-full items-center gap-4">
 			<a href="/">about</a>
 			<a href="/#project">projects</a>
 			<a href="/resume">resume</a>
-			<a href="/#etc">...</a>
+			<a href="/#etc">etc</a>
 		</div>
 	</nav>
 	<div class="w-content mb-10">
@@ -61,7 +62,7 @@
 </div>
 
 <style type="text/css">
-  #header {
-    box-shadow: 0px calc(-4.5rem + clamp(1rem, var(--scroll), 4rem)) 2rem 3rem #f8fafc;
-  }
+	#header {
+		box-shadow: 0px -.5rem 2rem clamp(0rem, var(--scroll), 3rem) #fafaf9;
+	}
 </style>

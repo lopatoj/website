@@ -71,7 +71,18 @@ export const pageType = defineType({
       initialValue: () => [],
       of: [
         defineArrayMember({ type: 'block' }),
-        defineArrayMember({ type: 'image' })
+        defineArrayMember({ type: 'image' }),
+        defineArrayMember({ type: 'object', name: 'code', fields: [
+          defineField({
+            name: 'code',
+            type: 'text'
+          }),
+          defineField({
+            name: 'lang',
+            type: 'string',
+            validation: (rule) => rule.required()
+          })
+        ]})
       ],
     }),
   ],

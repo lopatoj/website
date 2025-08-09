@@ -2,6 +2,8 @@
   import type { Summary } from "./+page.js";
 
   const { name, slug, type, thumbnail, description, date }: Summary = $props();
+
+  const color = type === "project" ? "4338ca" : "dc2626";
 </script>
 
 <a
@@ -27,7 +29,7 @@
 
 <style>
   #summary {
-    box-shadow: 0 1rem 1rem -1rem rgba(0, 0, 0, 0);
+    box-shadow: 0 0rem 1.5rem -1.5rem rgba(0, 0, 0, 0);
   }
 
   #summary:hover {

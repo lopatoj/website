@@ -24,7 +24,6 @@
       <SummaryView {...summary} />
     {/each}
   </div>
-  <div class="h-96"></div>
 </div>
 
 <style>

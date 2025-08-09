@@ -23,7 +23,6 @@ p {
 	@apply tracking-tighter font-light;
 
 	word-spacing: -.1em;
-	letter-spacing: -.03em;
 }
 
 a:hover {

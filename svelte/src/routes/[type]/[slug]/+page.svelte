@@ -12,7 +12,7 @@
 </svelte:head>
 
 <div class="flex flex-row items-center">
-  <h1 class="text-xl sm:text-2xl flex-grow font-medium tracking-tighter">{name}</h1>
+  <h1 class="text-xl sm:text-2xl mr-4 flex-grow font-medium tracking-tighter">{name}</h1>
   <p class="min-w-fit">{dateFrom(date)}</p>
 </div>
 <div class="py-8 h-30 flex flex-col gap-2">

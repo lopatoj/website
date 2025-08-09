@@ -8,7 +8,7 @@
 }
 
 body {
-	@apply bg-slate-50 text-gray-900;
+	@apply bg-slate-50 text-gray-900 px-4;
 }
 
 main {
@@ -21,7 +21,7 @@ a {
 
 p {
 	word-spacing: -.1em;
-	letter-spacing: -.02em;
+	letter-spacing: -.03em;
 }
 
 a:hover {
@@ -33,5 +33,5 @@ a:active {
 }
 
 .w-content {
-	@apply w-[40rem];
+	@apply sm:w-[40rem] w-full;
 }

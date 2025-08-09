@@ -25,8 +25,11 @@
 		"vite": "^5.4.11"
 	},
 	"dependencies": {
+		"@fortawesome/free-brands-svg-icons": "^7.0.0",
+		"@fortawesome/free-solid-svg-icons": "^7.0.0",
 		"@sanity/client": "^6.24.3",
 		"@sanity/image-url": "^1.1.0",
-		"sanity": "workspace:*"
+		"sanity": "workspace:*",
+		"svelte-fa": "^4.0.4"
 	}
 }

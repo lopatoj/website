@@ -35,5 +35,5 @@ a:active {
 }
 
 .w-content {
-	@apply sm:w-[44rem] w-full;
+	@apply md:w-[44rem] w-full;
 }

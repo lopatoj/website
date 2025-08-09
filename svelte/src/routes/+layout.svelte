@@ -53,11 +53,11 @@
 </div>
 <div class="w-content min-h-16 py-3 flex flex-col sm:flex-row items-center gap-2 sm:justify-between tracking-tighter font-light">
   <a href="mailto:justin@lopato.org">justin@lopato.org</a>
-  <div class="hidden sm:block">|</div>
+  <div class="hidden sm:block text-stone-500">|</div>
   <a href="https://www.linkedin.com/in/lopatoj" class="flex flex-row items-center gap-1"><Fa icon={faSquareLinkedin}/> lopatoj</a>
-  <div class="hidden sm:block">|</div>
+  <div class="hidden sm:block text-stone-500">|</div>
   <a href="https://www.github.com/lopatoj" class="flex flex-row items-center gap-1"><Fa icon={faGithub}/> lopatoj</a>
-  <div class="hidden sm:block">|</div>
+  <div class="hidden sm:block text-stone-500">|</div>
   <p>© Justin Lopato {thisYear()}</p>
 </div>
 

@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-  <title>justin.lopa.to | {type} | {name}</title>
+  <title>lopa.to | {type} | {name}</title>
 </svelte:head>
 
 <div class="flex flex-row items-center mb-1">

@@ -38,7 +38,6 @@
 <svelte:window onscroll={setScroll} />
 <svelte:body {@attach setScroll} />
 
-<<<<<<< HEAD
 <div class="w-content flex flex-col items-center min-h-screen -mb-48 sm:-mb-16">
   <nav
     id="header"
@@ -65,26 +64,6 @@
     {@render children()}
   </div>
   <div class="h-48 sm:h-16"></div>
-=======
-<div class="w-content flex flex-col items-center min-h-screen -mb-16">
-	<nav id="header" class="z-10 top-0 sticky w-full flex mb-5 bg-stone-50 min-h-16 gap-4 py-3 items-center box-border text-lg tracking-tighter flex-col sm:flex-row">
-		<a class="flex h-full items-center gap-[.4rem] flex-grow" href="/">
-			<img src="/me.png" class="h-[1.3em] mb-1" alt="Justin" />
-			<span>justin</span>
-			<span>lopato</span>
-		</a>
-		<div class="flex h-full items-center gap-4">
-			<a href="/">about</a>
-			<a href="/#project" onclick={scrollTo}>projects</a>
-			<a href="/resume">resume</a>
-			<a href="/#etc" onclick={scrollTo}>etc</a>
-		</div>
-	</nav>
-	<div class="w-content mb-10">
-		{@render children()}
-	</div>
-	<div class="h-16"></div>
->>>>>>> eb5566240dd12291fb436c1deb091cdd30edb799
 </div>
 <div
   class="w-content min-h-16 py-3 flex flex-col sm:flex-row items-center gap-2 sm:justify-between tracking-tighter font-light"

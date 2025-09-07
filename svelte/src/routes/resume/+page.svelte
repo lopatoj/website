@@ -3,5 +3,5 @@
 </script>
 
 <div>
-	{data.text}
+	<!-- {data.text} -->
 </div>

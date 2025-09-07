@@ -9,7 +9,7 @@
 <a
   href="/{type}/{slug}"
   id="summary"
-  class="w-full box-content flex gap-6 hover:opacity-100 bg-[--bg] hover:scale-[102%] p-4 rounded-3xl"
+  class="w-full box-content flex gap-6 hover:opacity-100 bg-[--bg] hover:-translate-y-1 will-change-transform p-4 rounded-3xl"
 >
   <div class="h-full flex-grow flex flex-col gap-2">
     <p class="text-xl font-medium">

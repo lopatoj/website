@@ -1,38 +1,40 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 :root {
-	font-family: "CommitMono";
-	font-smooth: never;
+  font-family: "CommitMono";
+  font-smooth: never;
 }
 
 body {
-	@apply bg-stone-50 text-stone-800 px-4;
+  @apply bg-stone-300 text-stone-800 px-4;
+  text-rendering: geometricPrecision;
 }
 
 main {
-	@apply flex items-center flex-col relative;
+  @apply flex items-center flex-col relative;
 }
 
 a {
-	@apply text-inherit no-underline transition-all duration-[.2s] ease-in-out;
+  @apply text-inherit no-underline transition-all duration-[.2s] ease-in-out;
 }
 
 p {
-	@apply tracking-tighter font-light;
+  @apply font-light;
 
-	word-spacing: -.1em;
+  word-spacing: -0.1em;
+  letter-spacing: -0.03em;
 }
 
 a:hover {
-	@apply opacity-70;
+  @apply opacity-70;
 }
 
 a:active {
-	@apply opacity-40;
+  @apply opacity-40;
 }
 
 .w-content {
-	@apply md:w-[44rem] w-full;
+  @apply md:w-[70ex] w-full;
 }

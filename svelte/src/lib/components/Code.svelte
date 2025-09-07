@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { CustomBlockComponentProps } from "@portabletext/svelte";
+  import hljs from "highlight.js";
 
   type Props = {
     portableText: CustomBlockComponentProps<{
@@ -11,20 +12,33 @@
 
   const { portableText }: Props = $props();
 
-  const lines = portableText.value.code.split("\n");
+  const code = portableText.value.code;
+  const lines = code.split("\n").map((l) => hljs.highlightAuto(l).value);
   const numLinesPlaces = Math.ceil(Math.log10(lines.length));
 </script>
 
-<pre class="tracking-normal rounded-lg bg-stone-200 text-stone-700 p-4 pb-3 relative" style={`--num-width: ${numLinesPlaces}ex;`}><button class="absolute text-xs top-2 right-2 select-none hover:bg-stone-300 active:bg-stone-400 rounded p-1 pb-0 transition-all duration-[.2s] ease-in-out">{portableText.value.lang}</button><code lang={portableText.value.lang} class="block">{#each lines as line}<span>{line}</span>
-{/each}</code></pre>
+<svelte:head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/monokai.min.css"
+  />
+</svelte:head>
+
+<pre
+  class="tracking-normal rounded-lg bg-stone-700 text-stone-50 p-4 pb-3 relative"
+  style={`--num-width: ${numLinesPlaces}ch;`}><button
+    class="absolute text-xs top-2 right-2 select-none hover:bg-stone-800 active:bg-stone-900 rounded p-1 pb-0 transition-all duration-[.2s] ease-in-out"
+    >{portableText.value.lang}</button
+  ><code lang={portableText.value.lang} class="block font-light"
+    >{#each lines as line}<span>{@html line}
+</span>{/each}</code></pre>
 
 <style>
   code {
-    @apply font-light;
-    font-family: 'CommitMono', monospace;
+    font-family: "CommitMono", monospace;
     counter-reset: line;
     overflow-y: hidden;
-    scrollbar-color: #78716c #e7e5e4;
+    scrollbar-color: #78716c #44403c;
     scrollbar-width: auto;
   }
 

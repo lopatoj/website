@@ -1,21 +1,24 @@
+<!-- @component A block of text derived from the Sanity PortableText component. -->
+
 <script lang="ts">
   import { PortableText } from "@portabletext/svelte";
   import type { InputValue } from "@portabletext/svelte";
   import Image from "./Image.svelte";
   import Code from "./Code.svelte";
-  import Block from "./Block.svelte";
+  import LinkMark from "./LinkMark.svelte";
 
-  let { value }: { value: InputValue } = $props();
-
-  value = value || [];
+  let { value = [] }: { value: InputValue } = $props();
 </script>
 
-<div class="flex flex-col gap-8">
-  <PortableText {value} components={{
-    block: Block,
+<PortableText
+  {value}
+  components={{
     types: {
       image: Image,
-      code: Code
-    }
-  }} />
-</div>
+      code: Code,
+    },
+    marks: {
+      link: LinkMark,
+    },
+  }}
+/>

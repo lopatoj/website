@@ -1,30 +1,57 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
-  font-family: "CommitMono";
-  font-smooth: never;
+  font-size: 17px;
+
+  --fg: var(--color-stone-950);
+  --fg-a: var(--color-stone-700);
+  --fg-b: var(--color-stone-500);
+
+  --bg: var(--color-stone-50);
+  --bg-a: var(--color-stone-100);
+  --bg-b: var(--color-stone-200);
+  --bg-c: var(--color-stone-300);
+
+  :where(.dark) {
+    --fg: var(--color-stone-100);
+    --fg-a: var(--color-stone-300);
+    --fg-b: var(--color-stone-500);
+
+    --bg: var(--color-stone-900);
+    --bg-a: var(--color-stone-800);
+    --bg-b: var(--color-stone-700);
+    --bg-c: var(--color-stone-600);
+  }
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-display: "National Park", Inter, sans-serif;
+  --font-serif: "EB Garamond", Georgia, serif;
+  --font-mono: "CommitMono", "JetBrains Mono", monospace;
+  --color-fg: var(--fg);
+  --color-fg-a: var(--fg-a);
+  --color-fg-b: var(--fg-b);
+
+  --color-bg: var(--bg);
+  --color-bg-a: var(--bg-a);
+  --color-bg-b: var(--bg-b);
+  --color-bg-c: var(--bg-c);
 }
 
 body {
-  @apply bg-stone-300 text-stone-800 px-4;
-  text-rendering: geometricPrecision;
+  @apply px-4 font-display bg-bg text-fg;
+  text-rendering: optimizeLegibility;
 }
 
 main {
-  @apply flex items-center flex-col relative;
+  @apply flex items-center flex-col;
 }
 
 a {
-  @apply text-inherit no-underline transition-all duration-[.2s] ease-in-out;
-}
-
-p {
-  @apply font-light;
-
-  word-spacing: -0.1em;
-  letter-spacing: -0.03em;
+  @apply text-inherit no-underline transition-all duration-200 ease-in-out;
 }
 
 a:hover {
@@ -36,5 +63,9 @@ a:active {
 }
 
 .w-content {
-  @apply md:w-[70ex] w-full;
+  @apply md:w-170 w-full;
+}
+
+:not(pre) > code {
+  @apply text-sm bg-bg-a font-mono p-0.5 rounded-md border border-bg-c text-fg-a;
 }

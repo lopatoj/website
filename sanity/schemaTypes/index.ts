@@ -1,3 +1,4 @@
-import { pageType } from "./pageType";
+import {blogType} from './blogType'
+import {projectType} from './projectType'
 
-export const schemaTypes = [pageType];
+export const schemaTypes = [blogType, projectType]

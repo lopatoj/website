@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { delay } from "$lib/utils/dom";
   import type { CustomBlockComponentProps } from "@portabletext/svelte";
   import hljs from "highlight.js";
+  import Icon, { type IconType } from "./Icon.svelte";
 
   type Props = {
     portableText: CustomBlockComponentProps<{
@@ -12,38 +14,59 @@
 
   const { portableText }: Props = $props();
 
-  const code = portableText.value.code;
-  const lines = code.split("\n").map((l) => hljs.highlightAuto(l).value);
-  const numLinesPlaces = Math.ceil(Math.log10(lines.length));
+  const code = $derived(portableText.value.code);
+  const lines = $derived(
+    code
+      .split("\n")
+      .map(
+        (l) => hljs.highlight(l, { language: portableText.value.lang }).value,
+      ),
+  );
+  const numLinesPlaces = $derived(Math.ceil(Math.log10(lines.length)));
+
+  let icon: IconType = $state("copy");
+
+  const copy = async (e: MouseEvent & { currentTarget: HTMLButtonElement }) => {
+    icon = "check";
+    navigator.clipboard.writeText(code);
+
+    await delay(2000);
+    icon = "copy";
+  };
 </script>
 
 <svelte:head>
   <link
     rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/monokai.min.css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/stackoverflow-light.css"
   />
 </svelte:head>
 
 <pre
-  class="tracking-normal rounded-lg bg-stone-700 text-stone-50 p-4 pb-3 relative"
+  class="tracking-normal bg-bg-a border-bg-c border-solid border font-mono p-4 pb-3 relative rounded-md"
   style={`--num-width: ${numLinesPlaces}ch;`}><button
-    class="absolute text-xs top-2 right-2 select-none hover:bg-stone-800 active:bg-stone-900 rounded p-1 pb-0 transition-all duration-[.2s] ease-in-out"
-    >{portableText.value.lang}</button
-  ><code lang={portableText.value.lang} class="block font-light"
-    >{#each lines as line}<span>{@html line}
-</span>{/each}</code></pre>
+    onclick={copy}
+    class="absolute text-xs top-2 right-2 select-none hover:bg-bg-b text-fg-a cursor-pointer active:bg-bg-c rounded p-1 transition-all duration-200 ease-in-out"
+    ><Icon {icon} /></button
+  ><code lang={portableText.value.lang} class="block"
+    >{#each lines as line}<span
+        >{@html line}
+</span>{/each}</code
+  ></pre>
 
-<style>
+<style lang="postcss">
+  @reference "../../app.css";
+
   code {
-    font-family: "CommitMono", monospace;
     counter-reset: line;
     overflow-y: hidden;
     scrollbar-color: #78716c #44403c;
     scrollbar-width: auto;
+    line-height: 1.3rem;
   }
 
-  code span:before {
-    @apply text-stone-500;
+  code > span:before {
+    @apply text-fg-b;
     counter-increment: line;
     content: counter(line);
     display: inline-block;
@@ -52,7 +75,7 @@
     margin-right: 1rem;
   }
 
-  code[lang="bash"] span:before {
+  code[lang="bash"]:before {
     content: "$";
   }
 </style>

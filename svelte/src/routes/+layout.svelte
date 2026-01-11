@@ -1,96 +1,67 @@
 <script lang="ts">
   import "../app.css";
-  import { thisYear } from "$lib/dates";
-  import { goto, pushState } from "$app/navigation";
-  import Fa from "svelte-fa";
-  import {
-    faSquareLinkedin,
-    faGithub,
-  } from "@fortawesome/free-brands-svg-icons";
+  import { thisYear } from "$lib/utils/dates";
+  import Icon from "$lib/components/Icon.svelte";
+  import { setScroll, scrollTo } from "$lib/utils/dom";
+  import Face from "$lib/components/Face.svelte";
+  import ThemeSwitcher from "$lib/components/ThemeSwitcher.svelte";
 
   let { children } = $props();
-
-  const setScroll = () =>
-    document.body.style.setProperty(
-      "--scroll",
-      `${-document.body.getBoundingClientRect().top}px`,
-    );
-
-  const scrollTo = (
-    e: MouseEvent & {
-      currentTarget: EventTarget & HTMLAnchorElement;
-    },
-  ) => {
-    e.preventDefault();
-    const hash = e.currentTarget.href.lastIndexOf("#");
-    const id = e.currentTarget.href.substring(hash + 1);
-    const el = document.getElementById(id);
-
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      pushState(`/#${id}`, {});
-    } else {
-      goto(e.currentTarget.href);
-    }
-  };
+  let theme = "light";
 </script>
 
 <svelte:window onscroll={setScroll} />
 <svelte:body {@attach setScroll} />
 
-<div class="w-content flex flex-col items-center min-h-screen -mb-48 sm:-mb-16">
+<header class="w-full flex flex-col items-center z-10 top-0 sticky bg-bg">
   <nav
-    id="header"
-    class="z-10 box-border top-0 sticky w-full flex mb-5 bg-stone-300 min-h-16 gap-4 py-3 items-center text-lg tracking-tighter flex-col sm:flex-row"
+    class="w-content box-border flex min-h-20 items-center text-lg flex-col sm:flex-row"
   >
-    <a class="flex h-full items-center gap-[.4rem] flex-grow" href="/">
-      <img
-        src="/me_transparent.png"
-        class="h-[1.3em] mb-1"
-        id="logo"
-        alt="Justin"
-      />
-      <span>justin</span>
-      <span>lopato</span>
+    <a class="flex h-full items-center w-max gap-[.4rem] mr-auto" href="/">
+      <Face />
+      justin lopato
     </a>
-    <div class="flex h-full items-center gap-4">
+    <div class="flex h-full items-center gap-4 ml-auto">
       <a href="/">about</a>
-      <a href="/#project" onclick={scrollTo}>projects</a>
+      <a href="/projects" onclick={scrollTo}>projects</a>
       <a href="/resume">resume</a>
-      <a href="/#etc" onclick={scrollTo}>etc</a>
+      <a href="/blog" onclick={scrollTo}>blog</a>
     </div>
   </nav>
-  <div class="w-content mb-48 sm:mb-16">
-    {@render children()}
-  </div>
-  <div class="h-48 sm:h-16"></div>
-</div>
-<div
-  class="w-content min-h-16 py-3 flex flex-col sm:flex-row items-center gap-2 sm:justify-between tracking-tighter font-light"
+</header>
+<section class="w-content flex flex-col items-center">
+  {@render children()}
+</section>
+<footer
+  class="w-content min-h-20 flex flex-col sm:flex-row items-center gap-2 sm:gap-6 justify-center"
 >
-  <a href="mailto:justin@lopato.org">justin@lopato.org</a>
-  <!-- <div class="hidden sm:block text-stone-500">|</div> -->
+  <a href="mailto:justin@lopato.org" target="_blank">justin@lopato.org</a>
   <a
     href="https://www.linkedin.com/in/lopatoj"
-    class="flex flex-row items-center gap-1"
-    ><Fa icon={faSquareLinkedin} class="mb-[2px]" /> lopatoj</a
+    target="_blank"
+    class="flex flex-row items-center gap-0.5"
   >
-  <!-- <div class="hidden sm:block text-stone-500">|</div> -->
+    <Icon icon="linkedin" inline large /> lopatoj
+  </a>
   <a
     href="https://www.github.com/lopatoj"
-    class="flex flex-row items-center gap-1"
-    ><Fa icon={faGithub} class="mb-[2px]" /> lopatoj</a
+    target="_blank"
+    class="flex flex-row items-center gap-0.5"
   >
-  <!-- <div class="hidden sm:block text-stone-500">|</div> -->
-  <p>© Justin Lopato {thisYear()}</p>
-</div>
+    <Icon icon="github" inline large /> lopatoj
+  </a>
+  <ThemeSwitcher class="sm:mr-auto" />
+  <p class="sm:ml-auto font-light">© Justin Lopato {thisYear()}</p>
+</footer>
 
-<style type="text/css">
-  #header {
-    box-shadow: 0px -0.5rem 2rem clamp(0rem, var(--scroll), 3rem) #d6d3d1;
+<style type="text/css" lang="postcss">
+  @reference "../app.css";
+
+  header {
+    box-shadow: 0px -0.5rem 2rem clamp(0rem, var(--scroll), 3rem) var(--bg);
   }
 
-  #logo {
-    /*image-rendering: crisp-edges;*/
+  section {
+    min-height: calc(100vh - 40 * var(--spacing));
   }
 </style>

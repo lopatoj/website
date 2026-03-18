@@ -35,7 +35,7 @@
 <footer
   class="w-content min-h-20 flex flex-col sm:flex-row items-center gap-2 sm:gap-6 justify-center"
 >
-  <a href="mailto:justin@lopato.org" target="_blank">justin@lopato.org</a>
+  <a href="mailto:justin@lopa.to" target="_blank">justin@lopa.to</a>
   <a
     href="https://www.linkedin.com/in/lopatoj"
     target="_blank"

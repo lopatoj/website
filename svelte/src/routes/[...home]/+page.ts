@@ -1,6 +1,6 @@
-import type { PageLoad } from "./$types";
-import { pageSource, type Summary } from "$lib/pageSource";
 import { redirect } from "@sveltejs/kit";
+import { pageSource, type Summary } from "$lib/pageSource";
+import type { PageLoad } from "./$types";
 
 export const load: PageLoad = async ({
   params,

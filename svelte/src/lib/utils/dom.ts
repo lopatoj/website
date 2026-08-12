@@ -1,10 +1,13 @@
-import { pushState, goto } from '$app/navigation';
+import { goto, pushState } from "$app/navigation";
 
 /**
  * Sets the `--scroll` css variable to the current scroll position on the page.
  */
 export function setScroll() {
-	document.body.style.setProperty('--scroll', `${-document.body.getBoundingClientRect().top}px`);
+  document.body.style.setProperty(
+    "--scroll",
+    `${-document.body.getBoundingClientRect().top}px`,
+  );
 }
 
 /**
@@ -14,21 +17,21 @@ export function setScroll() {
  * @param e
  */
 export function scrollTo(
-	e: MouseEvent & {
-		currentTarget: EventTarget & HTMLAnchorElement;
-	}
+  e: MouseEvent & {
+    currentTarget: EventTarget & HTMLAnchorElement;
+  },
 ) {
-	e.preventDefault();
-	const hash = e.currentTarget.href.lastIndexOf('/');
-	const id = e.currentTarget.href.substring(hash + 1);
-	const el = document.getElementById(id);
+  e.preventDefault();
+  const hash = e.currentTarget.href.lastIndexOf("/");
+  const id = e.currentTarget.href.substring(hash + 1);
+  const el = document.getElementById(id);
 
-	if (el) {
-		el.scrollIntoView({ behavior: 'smooth' });
-		pushState(`/${id}`, {});
-	} else {
-		goto(e.currentTarget.href);
-	}
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+    pushState(`/${id}`, {});
+  } else {
+    goto(e.currentTarget.href);
+  }
 }
 
 type ClearOnCallback = (fn: () => void) => void;
@@ -50,12 +53,15 @@ type ClearOnCallback = (fn: () => void) => void;
  * @param clearOn function with a callback paramater which recieves a function that clears the timeout
  * @returns an empty promise (</3)
  */
-export async function delay(ms: number, clearOn?: ClearOnCallback): Promise<void> {
-	return new Promise((resolve) => {
-		const id = window.setTimeout(resolve, ms);
-		if (clearOn)
-			clearOn(() => {
-				window.clearInterval(id);
-			});
-	});
+export async function delay(
+  ms: number,
+  clearOn?: ClearOnCallback,
+): Promise<void> {
+  return new Promise((resolve) => {
+    const id = window.setTimeout(resolve, ms);
+    if (clearOn)
+      clearOn(() => {
+        window.clearInterval(id);
+      });
+  });
 }

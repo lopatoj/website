@@ -1,13 +1,13 @@
 <script lang="ts">
-  import "../app.css";
-  import { thisYear } from "$lib/utils/dates";
-  import Icon from "$lib/components/Icon.svelte";
-  import { setScroll, scrollTo } from "$lib/utils/dom";
-  import Face from "$lib/components/Face.svelte";
-  import ThemeSwitcher from "$lib/components/ThemeSwitcher.svelte";
+import "../app.css";
+import Face from "$lib/components/Face.svelte";
+import Icon from "$lib/components/Icon.svelte";
+import ThemeSwitcher from "$lib/components/ThemeSwitcher.svelte";
+import { thisYear } from "$lib/utils/dates";
+import { scrollTo, setScroll } from "$lib/utils/dom";
 
-  let { children } = $props();
-  let theme = "light";
+let { children } = $props();
+let theme = "light";
 </script>
 
 <svelte:window onscroll={setScroll} />

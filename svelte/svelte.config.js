@@ -10,6 +10,9 @@ const config = {
   vitePlugin: installPolyfills(),
   kit: {
     adapter: adapter(),
+    env: {
+      dir: "../",
+    },
   },
 };
 

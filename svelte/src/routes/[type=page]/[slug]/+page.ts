@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
+import { type Page, pageSource } from "$lib/pageSource";
 import type { PageLoad } from "./$types";
-import { pageSource, type Page } from "$lib/pageSource";
 
 export const load: PageLoad = async ({ params }): Promise<{ page: Page }> => {
   if (params.slug.length === 0) {

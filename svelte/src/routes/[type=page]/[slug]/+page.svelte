@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Text from "$lib/components/Text.svelte";
-  import { dateFrom } from "$lib/utils/dates.js";
+import Text from "$lib/components/Text.svelte";
+import { dateFrom } from "$lib/utils/dates.js";
 
-  const { data } = $props();
-  const { title, type, date, thumbnail, body } = $derived(data.page);
+const { data } = $props();
+const { title, type, date, thumbnail, body } = $derived(data.page);
 </script>
 
 <svelte:head>
@@ -17,8 +17,8 @@
 <img
   src={thumbnail.url}
   alt={thumbnail.caption}
-  class="w-full h-48 object-cover rounded-md mb-6"
+  class="w-full h-48 object-cover rounded-sm mb-6"
 />
-<article class="prose-lg w-content mb-6 font-serif! text-lg!">
+<article class="prose-lg w-content mb-6 font-serif text-xl">
   <Text value={body} />
 </article>

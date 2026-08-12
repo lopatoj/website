@@ -1,8 +1,8 @@
 <script lang="ts">
-  import {
-    PUBLIC_RESUME_IMAGE_URL,
-    PUBLIC_RESUME_PDF_URL,
-  } from "$env/static/public";
+import {
+  PUBLIC_RESUME_IMAGE_URL,
+  PUBLIC_RESUME_PDF_URL,
+} from "$env/static/public";
 </script>
 
 <svelte:head>
@@ -15,11 +15,14 @@
 </svelte:head>
 
 <abbr title="Click to download">
-  <a href={PUBLIC_RESUME_PDF_URL} class="my-6 flex flex-col items-center">
+  <a
+    href={PUBLIC_RESUME_PDF_URL}
+    class="my-6 flex flex-col items-center dark:hover:opacity-90!"
+  >
     <img
       src={PUBLIC_RESUME_IMAGE_URL}
       alt="Justin's Resume"
-      class="bg-white p-10 box-content shadow-xl dark:shadow-black rounded-md"
+      class="bg-white p-10 box-content shadow-xl dark:shadow-black rounded-sm"
     />
   </a>
 </abbr>

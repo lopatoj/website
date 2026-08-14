@@ -85,3 +85,8 @@ export class ThemeProvider {
     return this.theme;
   }
 }
+
+/**
+ * The shared application theme provider.
+ */
+export const themeProvider = new ThemeProvider();

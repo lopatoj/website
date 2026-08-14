@@ -1,20 +1,23 @@
 import { redirect } from "@sveltejs/kit";
-import { sanityRepository } from "$lib";
-import type { BlogSummary, ProjectSummary } from "$lib/sanity.svelte";
+import { fetchPinnedSummaries } from "$lib/server/sanity";
+import type { Summary } from "$lib/types";
 import type { PageServerLoad } from "./$types";
 
+// This catch-all route renders the home page for "/", "/projects" and "/blog".
+// The latter two exist so the nav links can smooth-scroll to their sections
+// (see scrollTo in $lib/utils/dom.ts); anything else redirects home.
 export const load: PageServerLoad = async ({
   params,
 }): Promise<{
-  projects: ProjectSummary[];
-  blogs: BlogSummary[];
+  projects: Summary[];
+  blogs: Summary[];
 }> => {
   if (!["", "projects", "blog"].includes(params.home ?? "")) {
     redirect(303, "/");
   }
 
   return {
-    projects: await sanityRepository.fetchPinnedProjectSummaries(3),
-    blogs: await sanityRepository.fetchPinnedBlogSummaries(3),
+    projects: await fetchPinnedSummaries("project", 3),
+    blogs: await fetchPinnedSummaries("blog", 3),
   };
 };

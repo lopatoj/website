@@ -1,13 +1,13 @@
 <script lang="ts">
   import Text from "$lib/components/Text.svelte";
-  import { dateFrom } from "$lib/utils/dates.js";
+  import { dateFrom } from "$lib/utils/dates";
 
   const { data } = $props();
   const { title, date, thumbnail, body } = $derived(data.page);
 </script>
 
 <svelte:head>
-  <title>lopa.to | blog | {title}</title>
+  <title>lopa.to | {data.type} | {title}</title>
 </svelte:head>
 
 <div class="mt-6 mb-4 flex w-full flex-row items-center">

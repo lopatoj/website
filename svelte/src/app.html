@@ -11,6 +11,18 @@
       href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=National+Park:wght@200..800&display=swap"
       rel="stylesheet"
     />
+    <script>
+      // Apply the stored/system theme before first paint to avoid a flash of the wrong theme.
+      try {
+        const stored = localStorage.getItem("theme");
+        const dark = stored
+          ? stored === "dark"
+          : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (dark) document.body.classList.add("dark");
+      } catch {
+        // localStorage unavailable (e.g. Safari private browsing); default theme applies.
+      }
+    </script>
     %sveltekit.head%
   </head>
   <body data-sveltekit-preload-data="hover">

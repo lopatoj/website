@@ -19,13 +19,12 @@ export function scrollTo(
   },
 ) {
   e.preventDefault();
-  const hash = e.currentTarget.href.lastIndexOf("/");
-  const id = e.currentTarget.href.substring(hash + 1);
+  const id = new URL(e.currentTarget.href).pathname.split("/").pop() ?? "";
   const el = document.getElementById(id);
 
   if (el) {
     el.scrollIntoView({ behavior: "smooth" });
-    // Shallow routing to a same-page hash fragment; not a statically-resolvable route.
+    // Shallow routing to a same-page section; not a statically-resolvable route.
     // eslint-disable-next-line svelte/no-navigation-without-resolve
     pushState(`/${id}`, {});
   } else {
@@ -35,31 +34,13 @@ export function scrollTo(
   }
 }
 
-type ClearOnCallback = (fn: () => void) => void;
-
 /**
  * Asynchronous delay function via setTimeout.
  *
- * Example:
- * ```ts
- * // calls callback when component is removed from DOM
- * const onDestroy = (fn: () => void) => void
- *
- * // async delay call, which is essentially canceled if
- * // parent component is destroyed according to onDestroy
- * await delay(1000, onDestroy);
- * ```
- *
  * @param ms the delay time in milliseconds
- * @param clearOn function with a callback paramater which recieves a function that clears the timeout
- * @returns an empty promise (</3)
  */
-export async function delay(ms: number, clearOn?: ClearOnCallback): Promise<void> {
+export async function delay(ms: number): Promise<void> {
   return new Promise((resolve) => {
-    const id = window.setTimeout(resolve, ms);
-    if (clearOn)
-      clearOn(() => {
-        window.clearInterval(id);
-      });
+    window.setTimeout(resolve, ms);
   });
 }

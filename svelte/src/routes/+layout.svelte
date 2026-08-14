@@ -1,15 +1,23 @@
 <script lang="ts">
   import { afterNavigate } from "$app/navigation";
+  import { resolve } from "$app/paths";
+  import { onMount } from "svelte";
   import { fly } from "svelte/transition";
   import "../app.css";
-  import { Face, Icon, ThemeToggle } from "$lib/components";
+  import Face from "$lib/components/Face.svelte";
+  import Icon from "$lib/components/Icon.svelte";
+  import ThemeToggle from "$lib/components/ThemeToggle.svelte";
+  import { themeProvider } from "$lib/theme.svelte";
   import { thisYear } from "$lib/utils/dates";
   import { scrollTo, setScroll } from "$lib/utils/dom";
-  import { resolve } from "$app/paths";
 
   let { children } = $props();
 
   let menuOpen = $state(false);
+
+  onMount(() => {
+    themeProvider.initTheme();
+  });
 
   afterNavigate(() => {
     menuOpen = false;
@@ -56,7 +64,7 @@
       <span>justin</span><span>lopato</span>
     </a>
 
-    <span class="text-md translate-y-[0.1rem] text-emerald-300 max-sm:hidden" aria-hidden="true"
+    <span class="text-md translate-y-[0.1rem] text-emerald-700 dark:text-emerald-300 max-sm:hidden" aria-hidden="true"
       >✺</span
     >
 
@@ -67,7 +75,7 @@
     <div class="relative ml-auto sm:hidden">
       <button
         type="button"
-        class="relative z-30 translate-y-[0.1rem] text-4xl text-emerald-300 transition-transform duration-200 ease-in-out {menuOpen
+        class="relative z-30 translate-y-[0.1rem] text-4xl text-emerald-700 dark:text-emerald-300  transition-transform duration-200 ease-in-out {menuOpen
           ? 'rotate-90'
           : ''}"
         aria-expanded={menuOpen}

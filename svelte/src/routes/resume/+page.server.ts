@@ -1,9 +1,9 @@
-import { sanityRepository } from "$lib";
-import type { Experience } from "$lib/sanity.svelte";
+import { fetchResumeExperiences } from "$lib/server/sanity";
+import type { Experience } from "$lib/types";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async (): Promise<{
   experiences: Experience[];
 }> => {
-  return { experiences: await sanityRepository.fetchResumeExperiences() };
+  return { experiences: await fetchResumeExperiences() };
 };

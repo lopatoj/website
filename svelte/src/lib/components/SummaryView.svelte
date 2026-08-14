@@ -1,20 +1,17 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import type { BlogSummary, ProjectSummary } from "$lib/sanity.svelte";
+  import type { ContentType, Summary } from "$lib/types";
   import { dateFrom } from "$lib/utils/dates";
 
-  type Props = (BlogSummary | ProjectSummary) & { type: "blog" | "project" };
+  type Props = Summary & { type: ContentType };
 
   const { title, slug, type, thumbnail, description, date }: Props = $props();
 
-  const href = $derived(
-    type === "blog" ? resolve("/blog/[slug]", { slug }) : resolve("/project/[slug]", { slug }),
-  );
+  const href = $derived(resolve("/[type=contentType]/[slug]", { type, slug }));
 </script>
 
 <a
   {href}
-  id="summary"
   class="hover:bg-bg-a box-content flex w-full gap-6 rounded-md p-3 hover:opacity-100! active:opacity-70!"
 >
   <div class="flex h-full grow flex-col gap-2">

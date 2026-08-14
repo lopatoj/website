@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Experience } from "$lib/sanity.svelte";
+  import type { Experience } from "$lib/types";
 
   const {
     title,
@@ -13,11 +13,11 @@
   }: Experience = $props();
 
   const startAsDate = $derived(new Date(startDate));
-  const endAsData = $derived(new Date(endDate));
+  const endAsDate = $derived(new Date(endDate));
 
   const start = $derived(`${startAsDate.getMonth() + 1}/${startAsDate.getFullYear()}`);
   const end = $derived(
-    current ? "Present" : `${endAsData.getMonth() + 1}/${endAsData.getFullYear()}`,
+    current ? "Present" : `${endAsDate.getMonth() + 1}/${endAsDate.getFullYear()}`,
   );
 </script>
 

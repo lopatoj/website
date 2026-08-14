@@ -3,16 +3,9 @@
 
   const { data } = $props();
 
-  const workExperiences = $derived(
-    data.experiences
-      .filter((experience) => experience.type === "work")
-      .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()),
-  );
-  const activities = $derived(
-    data.experiences
-      .filter((experience) => experience.type === "project")
-      .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()),
-  );
+  // Experiences arrive pre-sorted by startDate descending from the server.
+  const workExperiences = $derived(data.experiences.filter((e) => e.type === "work"));
+  const activities = $derived(data.experiences.filter((e) => e.type === "project"));
 </script>
 
 <svelte:head>
@@ -51,28 +44,6 @@
     {/each}
   </div>
 </div>
-
-<!-- <svelte:head>
-  <link
-    rel="preload"
-    as="image"
-    href={PUBLIC_RESUME_IMAGE_URL}
-    fetchpriority="high"
-  />
-</svelte:head>
-
-<abbr title="Click to download">
-  <a
-    href={PUBLIC_RESUME_PDF_URL}
-    class="my-6 flex flex-col items-center dark:hover:opacity-90!"
-  >
-    <img
-      src={PUBLIC_RESUME_IMAGE_URL}
-      alt="Justin's Resume"
-      class="bg-white p-10 box-content shadow-xl dark:shadow-black rounded-sm"
-    />
-  </a>
-</abbr> -->
 
 <style lang="postcss">
   @reference "@app.css";

@@ -1,13 +1,8 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { themeProvider } from "$lib";
+  import { themeProvider } from "$lib/theme.svelte";
   import Icon from "./Icon.svelte";
 
   const { ...rest } = $props();
-
-  onMount(() => {
-    themeProvider.initTheme();
-  });
 </script>
 
 <button

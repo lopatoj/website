@@ -25,8 +25,12 @@ export function scrollTo(
 
   if (el) {
     el.scrollIntoView({ behavior: "smooth" });
+    // Shallow routing to a same-page hash fragment; not a statically-resolvable route.
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
     pushState(`/${id}`, {});
   } else {
+    // `href` is already a fully-resolved absolute URL from the anchor element.
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
     goto(e.currentTarget.href);
   }
 }

@@ -1,4 +1,9 @@
 {
   "name": "website",
-  "packageManager": "pnpm@11.21.0"
+  "packageManager": "pnpm@11.21.0",
+  "scripts": {
+    "format": "pnpm --recursive --parallel run format",
+    "lint": "pnpm --recursive --parallel run lint",
+    "dev": "pnpm --recursive --parallel run dev"
+  }
 }

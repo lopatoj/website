@@ -1,5 +1,5 @@
 <script lang="ts">
-import { themeProvider } from "$lib";
+  import { themeProvider } from "$lib";
 </script>
 
 {#if themeProvider.currentTheme() === "light"}

@@ -1,13 +1,13 @@
 <script lang="ts">
-import { onMount } from "svelte";
-import { themeProvider } from "$lib";
-import Icon from "./Icon.svelte";
+  import { onMount } from "svelte";
+  import { themeProvider } from "$lib";
+  import Icon from "./Icon.svelte";
 
-const { ...rest } = $props();
+  const { ...rest } = $props();
 
-onMount(() => {
-  themeProvider.initTheme();
-});
+  onMount(() => {
+    themeProvider.initTheme();
+  });
 </script>
 
 <button

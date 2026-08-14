@@ -1,0 +1,9 @@
+node_modules
+.svelte-kit
+.vercel
+.sanity
+dist
+build
+pnpm-lock.yaml
+*.min.*
+static

@@ -1,17 +1,24 @@
 <script lang="ts">
-import type { Summary } from "$lib/pageSource";
-import { dateFrom } from "$lib/utils/dates";
+  import { resolve } from "$app/paths";
+  import type { BlogSummary, ProjectSummary } from "$lib/sanity.svelte";
+  import { dateFrom } from "$lib/utils/dates";
 
-const { title, slug, type, thumbnail, description, date }: Summary = $props();
+  type Props = (BlogSummary | ProjectSummary) & { type: "blog" | "project" };
+
+  const { title, slug, type, thumbnail, description, date }: Props = $props();
+
+  const href = $derived(
+    type === "blog" ? resolve("/blog/[slug]", { slug }) : resolve("/project/[slug]", { slug }),
+  );
 </script>
 
 <a
-  href="/{type}/{slug}"
+  {href}
   id="summary"
-  class="w-full flex box-content gap-6 hover:bg-bg-a hover:opacity-100! active:opacity-70! p-3 rounded-md"
+  class="hover:bg-bg-a box-content flex w-full gap-6 rounded-md p-3 hover:opacity-100! active:opacity-70!"
 >
-  <div class="h-full grow flex flex-col gap-2">
-    <p class="text-xl flex flex-row font-medium gap-3 items-center">
+  <div class="flex h-full grow flex-col gap-2">
+    <p class="flex flex-row items-center gap-3 text-xl font-medium">
       {title}<span class="text-[.8em] font-light">{dateFrom(date)}</span>
     </p>
     <p>{description}</p>
@@ -19,6 +26,6 @@ const { title, slug, type, thumbnail, description, date }: Summary = $props();
   <img
     src={thumbnail.url}
     alt={thumbnail.caption}
-    class="max-h-24 max-w-56 object-cover rounded-sm"
-  >
+    class="max-h-24 max-w-56 rounded-sm object-cover"
+  />
 </a>

@@ -1,18 +1,18 @@
 <script lang="ts">
-import ExperienceItem from "./ExperienceItem.svelte";
+  import ExperienceItem from "./ExperienceItem.svelte";
 
-const { data } = $props();
+  const { data } = $props();
 
-const workExperiences = $derived(
-  data.experiences
-    .filter((experience) => experience.type === "work")
-    .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()),
-);
-const activities = $derived(
-  data.experiences
-    .filter((experience) => experience.type === "project")
-    .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()),
-);
+  const workExperiences = $derived(
+    data.experiences
+      .filter((experience) => experience.type === "work")
+      .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()),
+  );
+  const activities = $derived(
+    data.experiences
+      .filter((experience) => experience.type === "project")
+      .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()),
+  );
 </script>
 
 <svelte:head>
@@ -21,42 +21,36 @@ const activities = $derived(
 
 <div class="w-full font-sans">
   <h2 class="text-lg font-semibold">Education</h2>
-  <hr>
-  <div class="flex flex-row w-full text-md pt-2">
-    <span class="mr-auto font-semibold"
+  <hr />
+  <div class="text-md flex flex-col gap-x-4 pt-2 sm:flex-row sm:items-baseline sm:justify-between">
+    <span class="min-w-0 font-semibold text-pretty"
       >Rice University, George R. Brown School of Engineering</span
     >
-    <span>Expected 5/2027</span>
+    <span class="text-fg-a sm:text-fg shrink-0 text-sm sm:text-base">Expected 5/2027</span>
   </div>
-  <div class="flex flex-row w-full text-sm pb-3 oblique">
-    <span class="mr-auto">Computer Science</span>
-    <span>GPA: 3.75</span>
+  <div
+    class="oblique flex flex-col gap-x-4 pb-3 text-sm sm:flex-row sm:items-baseline sm:justify-between"
+  >
+    <span class="min-w-0">Computer Science</span>
+    <span class="shrink-0">GPA: 3.75</span>
   </div>
 
   <h2 class="text-lg font-semibold">Work Experience</h2>
-  <hr>
-  <div class="flex flex-col w-full gap-2 py-2 text-md">
+  <hr />
+  <div class="text-md flex w-full flex-col gap-2 py-2">
     {#each workExperiences as experience (experience.startDate)}
       <ExperienceItem {...experience} />
     {/each}
   </div>
 
   <h2 class="text-lg font-semibold">Activities</h2>
-  <hr>
-  <div class="flex flex-col w-full gap-2 py-2 text-md">
+  <hr />
+  <div class="text-md flex w-full flex-col gap-2 py-2">
     {#each activities as experience (experience.startDate)}
       <ExperienceItem {...experience} />
     {/each}
   </div>
 </div>
-
-<style lang="postcss">
-@reference "@app.css";
-
-hr {
-  @apply bg-stone-200/20 h-0.5 border-none rounded-full;
-}
-</style>
 
 <!-- <svelte:head>
   <link
@@ -79,3 +73,11 @@ hr {
     />
   </a>
 </abbr> -->
+
+<style lang="postcss">
+  @reference "@app.css";
+
+  hr {
+    @apply h-0.5 rounded-full border-none bg-stone-200/20;
+  }
+</style>

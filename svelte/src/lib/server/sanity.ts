@@ -19,6 +19,52 @@ const SUMMARY_FIELDS = `
   "date": publishedAt
 `;
 
+const FALLBACK_THUMBNAIL_URL = "/me.png";
+
+type SummaryShape = Partial<Summary> & {
+  thumbnail?: Partial<Summary["thumbnail"]> | null;
+};
+
+type PageShape = SummaryShape & {
+  body?: Page["body"] | null;
+};
+
+function normalizeSummary(summary: SummaryShape): Summary | null {
+  const slug = summary.slug?.trim();
+  const title = summary.title?.trim();
+
+  if (!slug || !title) {
+    return null;
+  }
+
+  return {
+    slug,
+    title,
+    thumbnail: {
+      url: summary.thumbnail?.url ?? FALLBACK_THUMBNAIL_URL,
+      caption: summary.thumbnail?.caption ?? title,
+    },
+    description: summary.description ?? "",
+    date: summary.date ?? new Date().toISOString(),
+  };
+}
+
+function normalizePage(page: PageShape | null): Page | null {
+  if (!page) {
+    return null;
+  }
+
+  const summary = normalizeSummary(page);
+  if (!summary) {
+    return null;
+  }
+
+  return {
+    ...summary,
+    body: page.body ?? [],
+  };
+}
+
 /**
  * Fetches the full data of a content page.
  *
@@ -27,10 +73,20 @@ const SUMMARY_FIELDS = `
  * @returns the Page, or null if not found
  */
 export async function fetchPage(type: ContentType, slug: string): Promise<Page | null> {
-  return client.fetch(`*[_type == $type && slug.current == $slug]{ ${SUMMARY_FIELDS}, body }[0]`, {
-    type,
-    slug,
-  });
+  try {
+    const page = await client.fetch<PageShape | null>(
+      `*[_type == $type && slug.current == $slug]{ ${SUMMARY_FIELDS}, body }[0]`,
+      {
+        type,
+        slug,
+      },
+    );
+
+    return normalizePage(page);
+  } catch (error) {
+    console.error("Failed to fetch page from Sanity", { type, slug, error });
+    return null;
+  }
 }
 
 /**
@@ -41,25 +97,38 @@ export async function fetchPage(type: ContentType, slug: string): Promise<Page |
  * @returns the Summary[], or empty array if none found
  */
 export async function fetchPinnedSummaries(type: ContentType, count: number): Promise<Summary[]> {
-  return client.fetch(
-    `*[_type == $type && pinned == true]{ ${SUMMARY_FIELDS} }[0...$count] | order(date desc)`,
-    { type, count },
-  );
+  try {
+    const summaries = await client.fetch<SummaryShape[]>(
+      `*[_type == $type && pinned == true] | order(publishedAt desc) [0...$count] { ${SUMMARY_FIELDS} }`,
+      { type, count },
+    );
+    return summaries
+      .map((summary) => normalizeSummary(summary))
+      .filter((summary): summary is Summary => summary !== null);
+  } catch (error) {
+    console.error("Failed to fetch pinned summaries from Sanity", { type, count, error });
+    return [];
+  }
 }
 
 /**
  * Fetches all resume experiences, most recent first.
  */
 export async function fetchResumeExperiences(): Promise<Experience[]> {
-  return client.fetch(`*[_type == "experience"]{
-    title,
-    type,
-    company,
-    location,
-    startDate,
-    endDate,
-    current,
-    description,
-    bullets
-  } | order(startDate desc)`);
+  try {
+    return await client.fetch(`*[_type == "experience"]{
+      title,
+      type,
+      company,
+      location,
+      startDate,
+      endDate,
+      current,
+      description,
+      bullets
+    } | order(startDate desc)`);
+  } catch (error) {
+    console.error("Failed to fetch resume experiences from Sanity", { error });
+    return [];
+  }
 }

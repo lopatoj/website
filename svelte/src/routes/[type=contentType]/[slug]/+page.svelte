@@ -4,6 +4,7 @@
 
   const { data } = $props();
   const { title, date, thumbnail, body } = $derived(data.page);
+  const formattedDate = $derived(dateFrom(date));
 </script>
 
 <svelte:head>
@@ -12,10 +13,12 @@
 
 <div class="flex w-full flex-row items-end font-sans">
   <h1 class="mr-auto text-lg font-semibold">{title}</h1>
-  <p class="mb-[0.05rem] ml-6 min-w-fit font-light">
-    <span class="max-sm:hidden">published on</span>
-    {dateFrom(date)}
-  </p>
+  {#if formattedDate}
+    <p class="mb-[0.05rem] ml-6 min-w-fit font-light">
+      <span class="max-sm:hidden">published on</span>
+      {formattedDate}
+    </p>
+  {/if}
 </div>
 <hr class="mb-6 w-full" />
 <img src={thumbnail.url} alt={thumbnail.caption} class="h-48 w-full rounded-xs object-cover" />

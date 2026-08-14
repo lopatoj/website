@@ -1,13 +1,4 @@
 {
   "name": "website",
-  "packageManager": "pnpm@10.15.1",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@sveltejs/kit",
-      "esbuild"
-    ],
-    "ignoredBuiltDependencies": [
-      "esbuild"
-    ]
-  }
+  "packageManager": "pnpm@11.21.0"
 }

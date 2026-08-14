@@ -16,9 +16,7 @@ const { portableText }: Props = $props();
 
 const code = $derived(portableText.value.code);
 const lines = $derived(
-  code
-    .split("\n")
-    .map((l) => hljs.highlight(l, { language: portableText.value.lang }).value),
+  code.split("\n").map((l) => hljs.highlight(l, { language: portableText.value.lang }).value),
 );
 const numLinesPlaces = $derived(Math.ceil(Math.log10(lines.length)));
 
@@ -37,12 +35,14 @@ const copy = async (_: MouseEvent & { currentTarget: HTMLButtonElement }) => {
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/stackoverflow-light.css"
-  />
+  >
 </svelte:head>
 
 <pre
   class="tracking-normal bg-bg-a font-mono p-4 pb-3 relative rounded-sm"
-  style={`--num-width: ${numLinesPlaces}ch;`}><button
+  style={`--num-width: ${numLinesPlaces}ch;`}
+><button
+    type="button"
     onclick={copy}
     class="absolute text-xs top-1 right-1 select-none hover:bg-bg-b text-fg-a cursor-pointer active:bg-bg-c rounded-sm p-1 transition-all duration-200 ease-in-out"
     ><Icon {icon} /></button
@@ -53,28 +53,28 @@ const copy = async (_: MouseEvent & { currentTarget: HTMLButtonElement }) => {
   ></pre>
 
 <style lang="postcss">
-  @reference "../../app.css";
+@reference "../../app.css";
 
-  code {
-    counter-reset: line;
-    overflow-y: hidden;
-    scrollbar-color: var(--color-fg-b) transparent;
-    scrollbar-width: thin;
-    scrollbar-gutter: stable;
-    line-height: 1.4rem;
-  }
+code {
+  counter-reset: line;
+  overflow-y: hidden;
+  scrollbar-color: var(--color-fg-b) transparent;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+  line-height: 1.4rem;
+}
 
-  code > span:before {
-    @apply text-fg-b;
-    counter-increment: line;
-    content: counter(line);
-    display: inline-block;
-    width: var(--num-width);
-    text-align: right;
-    margin-right: 1rem;
-  }
+code > span:before {
+  @apply text-fg-b;
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: var(--num-width);
+  text-align: right;
+  margin-right: 1rem;
+}
 
-  code[lang="bash"]:before {
-    content: "$";
-  }
+code[lang="bash"]:before {
+  content: "$";
+}
 </style>

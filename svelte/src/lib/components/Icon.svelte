@@ -1,13 +1,7 @@
 <script lang="ts">
 import Icon from "@iconify/svelte";
 
-export type IconType =
-  | "linkedin"
-  | "github"
-  | "copy"
-  | "check"
-  | "light"
-  | "dark";
+export type IconType = "linkedin" | "github" | "copy" | "check" | "light" | "dark";
 
 const {
   icon,

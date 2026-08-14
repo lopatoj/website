@@ -11,6 +11,4 @@ type Props = {
 let { portableText, children }: Props = $props();
 </script>
 
-<a href={portableText.value.href} target="_blank" class="underline!">
-	{@render children?.()}
-</a>
+<a href={portableText.value.href} target="_blank" class="underline!"> {@render children?.()} </a>

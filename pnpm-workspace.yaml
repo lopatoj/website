@@ -1,5 +1,7 @@
 packages:
   - 'svelte'
   - 'sanity'
+allowBuilds:
+  esbuild: true
 onlyBuiltDependencies:
   - esbuild

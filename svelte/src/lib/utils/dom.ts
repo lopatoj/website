@@ -4,10 +4,7 @@ import { goto, pushState } from "$app/navigation";
  * Sets the `--scroll` css variable to the current scroll position on the page.
  */
 export function setScroll() {
-  document.body.style.setProperty(
-    "--scroll",
-    `${-document.body.getBoundingClientRect().top}px`,
-  );
+  document.body.style.setProperty("--scroll", `${-document.body.getBoundingClientRect().top}px`);
 }
 
 /**
@@ -53,10 +50,7 @@ type ClearOnCallback = (fn: () => void) => void;
  * @param clearOn function with a callback paramater which recieves a function that clears the timeout
  * @returns an empty promise (</3)
  */
-export async function delay(
-  ms: number,
-  clearOn?: ClearOnCallback,
-): Promise<void> {
+export async function delay(ms: number, clearOn?: ClearOnCallback): Promise<void> {
   return new Promise((resolve) => {
     const id = window.setTimeout(resolve, ms);
     if (clearOn)

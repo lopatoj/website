@@ -4,7 +4,6 @@ const dateOptions: Intl.DateTimeFormatOptions = {
   year: "numeric",
 };
 
-export const dateFrom = (date: string) =>
-  new Date(date).toLocaleDateString("en-US", dateOptions);
+export const dateFrom = (date: string) => new Date(date).toLocaleDateString("en-US", dateOptions);
 
 export const thisYear = () => new Date().getFullYear();

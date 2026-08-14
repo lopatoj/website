@@ -20,5 +20,5 @@ const { title, slug, type, thumbnail, description, date }: Summary = $props();
     src={thumbnail.url}
     alt={thumbnail.caption}
     class="max-h-24 max-w-56 object-cover rounded-sm"
-  />
+  >
 </a>

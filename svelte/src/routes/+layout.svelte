@@ -55,18 +55,14 @@
   <a href={resolve("/blog")} onclick={onNavLink}>blog</a>
 {/snippet}
 
-<header
-  class="bg-bg font-display sticky top-0 z-10 mt-20 flex w-full flex-col items-center max-sm:mt-0"
->
+<header class="bg-bg font-display sticky top-0 z-10 flex w-full flex-col items-center">
   <nav class="w-content box-border flex min-h-20 items-center gap-2 text-lg">
     <a class="flex h-full w-max items-center gap-[0.3rem]" href={resolve("/")} onclick={closeMenu}>
       <Face />
       <span>justin</span><span>lopato</span>
     </a>
 
-    <span class="text-md translate-y-[0.1rem] text-emerald-700 dark:text-emerald-300 max-sm:hidden" aria-hidden="true"
-      >✺</span
-    >
+    <span class="text-accent translate-y-[0.1rem] max-sm:hidden" aria-hidden="true">✺</span>
 
     <div class="hidden items-center gap-2 sm:flex">
       {@render navLinks()}
@@ -75,7 +71,7 @@
     <div class="relative ml-auto sm:hidden">
       <button
         type="button"
-        class="relative z-30 translate-y-[0.1rem] text-4xl text-emerald-700 dark:text-emerald-300  transition-transform duration-200 ease-in-out {menuOpen
+        class="text-accent relative z-30 translate-y-[0.1rem] text-4xl transition-transform duration-200 ease-in-out {menuOpen
           ? 'rotate-90'
           : ''}"
         aria-expanded={menuOpen}
@@ -127,8 +123,17 @@
   @reference "../app.css";
 
   header {
-    box-shadow: 0px -0.5rem clamp(0rem, calc(var(--scroll) * 6), 2rem)
-      clamp(0rem, calc(var(--scroll) * 4), 3rem) var(--bg);
+    /* Space above the navbar on desktop; the shadow only starts once the
+       header has scrolled past this offset and is actually stuck. */
+    --header-offset: 0rem;
+    margin-top: var(--header-offset);
+    box-shadow: 0px -0.5rem clamp(0rem, calc((var(--scroll) - var(--header-offset)) * 6), 2rem)
+      clamp(0rem, calc((var(--scroll) - var(--header-offset)) * 4), 3rem) var(--bg);
+
+    /* Matches Tailwind's sm breakpoint (media query rem ignores :root font-size). */
+    @media (min-width: 40rem) {
+      --header-offset: 5rem;
+    }
   }
 
   .menu-panel {

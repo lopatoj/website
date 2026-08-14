@@ -12,17 +12,17 @@
 
 <a
   {href}
-  class="hover:bg-bg-a box-content flex w-full gap-6 rounded-md p-3 hover:opacity-100! active:opacity-70!"
+  class="hover:bg-bg-a -mt-1.5 box-content flex w-full gap-2 rounded-md p-1.5 hover:opacity-100! active:opacity-70!"
 >
-  <div class="flex h-full grow flex-col gap-2">
-    <p class="flex flex-row items-center gap-3 text-xl font-medium">
-      {title}<span class="text-[.8em] font-light">{dateFrom(date)}</span>
-    </p>
-    <p>{description}</p>
-  </div>
   <img
     src={thumbnail.url}
     alt={thumbnail.caption}
-    class="max-h-24 max-w-56 rounded-sm object-cover"
+    class="mr-0.5 h-12 w-12 rounded-xs object-cover"
   />
+  <div class="flex h-full grow flex-col gap-1">
+    <p class="flex flex-row gap-2 align-text-top">
+      {title}<span class="text-fg-b ml-auto min-w-max text-sm">{dateFrom(date)}</span>
+    </p>
+    <p class="text-sm">{description}</p>
+  </div>
 </a>

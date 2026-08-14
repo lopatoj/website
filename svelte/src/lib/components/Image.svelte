@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { CustomBlockComponentProps } from "@portabletext/svelte";
   import type { SanityAsset } from "@sanity/image-url";
-  import { urlFor } from "$lib/images";
+  import { urlFor } from "$lib/utils/images";
 
   type Props = {
     portableText: CustomBlockComponentProps<{

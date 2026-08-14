@@ -15,7 +15,7 @@
 {#if ["h1", "h2", "h3", "h4", "h5", "h6", "blockquote"].includes(style)}
   <svelte:element this={style} class="font-serif">{@render children?.()}</svelte:element>
 {:else if style === "normal"}
-  <p class="font-serif text-xl">{@render children?.()}</p>
+  <p class="font-serif text-lg">{@render children?.()}</p>
 {:else}
   {@render children?.()}
 {/if}

@@ -8,7 +8,7 @@
   <title>lopa.to</title>
 </svelte:head>
 
-<section class="w-content text-md mt-4">
+<section class="w-content">
   <p>Hello! My name is Justin Lopato, and you have found my portfoliresumlog.</p>
   <div id="projects" class="scroll-mt-24">
     <p>Here are some projects I've worked on:</p>

@@ -22,17 +22,15 @@
 </script>
 
 <section class="mb-1 flex flex-col">
-  <div class="flex flex-col gap-x-4 sm:flex-row sm:items-baseline sm:justify-between">
-    <span class="min-w-0 font-semibold text-pretty">{title}</span>
-    <span class="text-fg-a sm:text-fg shrink-0 text-sm sm:text-base">
+  <div class="split-row">
+    <span class="split-row-title">{title}</span>
+    <span class="split-row-meta">
       {start}
       <span class="ligatures ml-0.5 align-text-top font-mono text-sm"> -> </span>
       {end}
     </span>
   </div>
-  <div
-    class="text-fg-a oblique flex flex-col gap-x-4 text-sm sm:flex-row sm:items-baseline sm:justify-between"
-  >
+  <div class="text-fg-a oblique split-row text-sm">
     <span class="min-w-0 text-pretty">{company}</span>
     <span class="shrink-0">{location}</span>
   </div>

@@ -6,6 +6,7 @@
   type Props = Summary & { type: ContentType };
 
   const { title, slug, type, thumbnail, description, date }: Props = $props();
+  const formattedDate = $derived(dateFrom(date));
 
   const href = $derived(resolve("/[type=contentType]/[slug]", { type, slug }));
 </script>
@@ -21,7 +22,10 @@
   />
   <div class="flex h-full grow flex-col gap-1">
     <p class="flex flex-row gap-2 align-text-top">
-      {title}<span class="text-fg-b ml-auto min-w-max text-sm">{dateFrom(date)}</span>
+      {title}
+      {#if formattedDate}
+        <span class="text-fg-b ml-auto min-w-max text-sm">{formattedDate}</span>
+      {/if}
     </p>
     <p class="text-sm">{description}</p>
   </div>

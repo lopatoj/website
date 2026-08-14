@@ -26,6 +26,34 @@ export const projectType = defineType({
       initialValue: false,
     }),
     defineField({
+      name: "publishedAt",
+      type: "datetime",
+      initialValue: () => new Date().toISOString(),
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "description",
+      type: "text",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "thumbnail",
+      type: "object",
+      fields: [
+        defineField({
+          name: "image",
+          type: "image",
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: "caption",
+          type: "string",
+          validation: (rule) => rule.required(),
+        }),
+      ],
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "repository",
       type: "url",
     }),

@@ -102,7 +102,7 @@ a:active {
 }
 
 .w-content {
-  @apply w-full md:w-140;
+  @apply w-full md:w-145;
 }
 
 @layer components {

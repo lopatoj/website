@@ -1,14 +1,15 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
 
-  export type IconType = "linkedin" | "github" | "copy" | "check" | "light" | "dark";
+  export type IconType = "linkedin" | "github" | "copy" | "check" | "light" | "dark" | "link";
 
   const {
     icon,
     inline = false,
     large = false,
+    class: className = "",
     ...rest
-  }: { icon: IconType; inline?: boolean; large?: boolean } = $props();
+  }: { icon: IconType; inline?: boolean; large?: boolean; class?: string } = $props();
 
   const def = () => {
     switch (icon) {
@@ -24,8 +25,15 @@
         return "eva:sun-fill";
       case "dark":
         return "eva:moon-fill";
+      case "link":
+        return "eva:external-link-outline";
     }
   };
 </script>
 
-<Icon icon={def()} class={inline ? "inline" : ""} height={large ? "1.2em" : "1em"} {...rest} />
+<Icon
+  icon={def()}
+  class="{inline ? 'inline' : ''} {className}"
+  height={large ? "1.2em" : "1em"}
+  {...rest}
+/>

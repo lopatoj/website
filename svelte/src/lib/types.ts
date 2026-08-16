@@ -24,6 +24,7 @@ export type Summary = {
  */
 export type Page = Summary & {
   body: InputValue;
+  repository?: string;
 };
 
 /**

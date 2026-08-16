@@ -6,27 +6,22 @@
   type Props = Summary & { type: ContentType };
 
   const { title, slug, type, thumbnail, description, date }: Props = $props();
-  const formattedDate = $derived(dateFrom(date));
 
   const href = $derived(resolve("/[type=contentType]/[slug]", { type, slug }));
 </script>
 
 <a
   {href}
-  class="hover:bg-bg-a -mt-1.5 box-content flex w-full gap-2 rounded-md p-1.5 hover:opacity-100! active:opacity-70!"
+  class="hover:bg-bg-a box-content flex w-full items-start gap-3 rounded-md p-3 hover:opacity-100! active:opacity-70!"
 >
   <img
     src={thumbnail.url}
     alt={thumbnail.caption}
-    class="mr-0.5 h-12 w-12 rounded-xs object-cover"
+    class="h-20 w-20 shrink-0 rounded-sm object-cover"
   />
-  <div class="flex h-full grow flex-col gap-1">
-    <p class="flex flex-row gap-2 align-text-top">
-      {title}
-      {#if formattedDate}
-        <span class="text-fg-b ml-auto min-w-max text-sm">{formattedDate}</span>
-      {/if}
-    </p>
-    <p class="text-sm">{description}</p>
+  <div class="flex min-w-0 grow flex-col gap-1">
+    <p class="text-fg-b text-xs">{dateFrom(date)}</p>
+    <p class="leading-tight font-medium text-pretty">{title}</p>
+    <p class="text-fg-a line-clamp-2 text-sm leading-snug text-pretty">{description}</p>
   </div>
 </a>

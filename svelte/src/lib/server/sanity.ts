@@ -19,14 +19,13 @@ const SUMMARY_FIELDS = `
   "date": publishedAt
 `;
 
-const FALLBACK_THUMBNAIL_URL = "/me.png";
-
 type SummaryShape = Partial<Summary> & {
   thumbnail?: Partial<Summary["thumbnail"]> | null;
 };
 
 type PageShape = SummaryShape & {
   body?: Page["body"] | null;
+  repository?: Page["repository"] | null;
 };
 
 function normalizeSummary(summary: SummaryShape): Summary | null {
@@ -41,7 +40,7 @@ function normalizeSummary(summary: SummaryShape): Summary | null {
     slug,
     title,
     thumbnail: {
-      url: summary.thumbnail?.url ?? FALLBACK_THUMBNAIL_URL,
+      url: summary.thumbnail?.url ?? "",
       caption: summary.thumbnail?.caption ?? title,
     },
     description: summary.description ?? "",
@@ -62,6 +61,7 @@ function normalizePage(page: PageShape | null): Page | null {
   return {
     ...summary,
     body: page.body ?? [],
+    repository: page.repository ?? undefined,
   };
 }
 
@@ -75,7 +75,7 @@ function normalizePage(page: PageShape | null): Page | null {
 export async function fetchPage(type: ContentType, slug: string): Promise<Page | null> {
   try {
     const page = await client.fetch<PageShape | null>(
-      `*[_type == $type && slug.current == $slug]{ ${SUMMARY_FIELDS}, body }[0]`,
+      `*[_type == $type && slug.current == $slug]{ ${SUMMARY_FIELDS}, body${type === "project" ? ", repository" : ""} }[0]`,
       {
         type,
         slug,

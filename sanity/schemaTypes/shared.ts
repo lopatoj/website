@@ -1,47 +1,68 @@
-import { defineArrayMember, defineField } from "sanity";
+import {defineArrayMember, defineField} from 'sanity'
 
 /**
  * Body text for blog posts and project descriptions.
  */
 export const body = defineField({
-  name: "body",
-  type: "array",
+  name: 'body',
+  type: 'array',
   initialValue: () => [],
   of: [
     defineArrayMember({
-      type: "block",
+      type: 'block',
       marks: {
         annotations: [
           {
-            name: "link",
-            type: "object",
-            title: "Link",
+            name: 'link',
+            type: 'object',
+            title: 'Link',
             fields: [
               {
-                name: "href",
-                type: "url",
-                title: "URL",
+                name: 'href',
+                type: 'url',
+                title: 'URL',
               },
             ],
           },
         ],
       },
     }),
-    defineArrayMember({ type: "image" }),
+    defineArrayMember({type: 'image'}),
     defineArrayMember({
-      type: "object",
-      name: "code",
+      type: 'object',
+      name: 'code',
       fields: [
         defineField({
-          name: "code",
-          type: "text",
+          name: 'code',
+          type: 'text',
         }),
         defineField({
-          name: "lang",
-          type: "string",
+          name: 'lang',
+          type: 'string',
           validation: (rule) => rule.required(),
         }),
       ],
     }),
   ],
-});
+})
+
+/**
+ * A thumbnail image with a caption.
+ */
+export const thumbnail = defineField({
+  name: 'thumbnail',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'image',
+      type: 'image',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'caption',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+  ],
+  validation: (rule) => rule.required(),
+})

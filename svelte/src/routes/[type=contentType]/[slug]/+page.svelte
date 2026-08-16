@@ -1,9 +1,10 @@
 <script lang="ts">
+  import Icon from "$lib/components/Icon.svelte";
   import Text from "$lib/components/Text.svelte";
   import { dateFrom } from "$lib/utils/dates";
 
   const { data } = $props();
-  const { title, date, thumbnail, body } = $derived(data.page);
+  const { title, date, thumbnail, body, repository } = $derived(data.page);
   const formattedDate = $derived(dateFrom(date));
 </script>
 
@@ -12,7 +13,18 @@
 </svelte:head>
 
 <div class="flex w-full flex-row items-end font-sans">
-  <h1 class="mr-auto text-lg font-semibold">{title}</h1>
+  {#if repository}
+    <a
+      href={repository}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mr-auto text-lg font-semibold text-blue-500 hover:underline"
+    >
+      {title}<Icon icon="link" inline class="text-fg-a ml-0.5 translate-y-[-0.05rem]" />
+    </a>
+  {:else}
+    <h1 class="mr-auto text-lg font-semibold">{title}</h1>
+  {/if}
   {#if formattedDate}
     <p class="mb-[0.05rem] ml-6 min-w-fit font-light">
       <span class="max-sm:hidden">published on</span>

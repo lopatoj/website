@@ -21,7 +21,7 @@
   </div>
   <div class="oblique split-row pb-3 text-sm">
     <span class="min-w-0">Computer Science</span>
-    <span class="shrink-0">GPA: 3.75</span>
+    <span class="shrink-0">GPA: 3.76</span>
   </div>
 
   <h2 class="section-heading">Work Experience</h2>
